@@ -21,6 +21,7 @@ export default function DemoPage() {
     onReset={async()=>{setGroup(p=>({...p,drawn_at:null}));}}
     onUpdate={async(input:GroupInput)=>{if(input.expected_members<group.joined_count) throw new Error('Cannot reduce group size below the number of registered members.');if(group.drawn_at && input.expected_members!==group.expected_members) throw new Error('Reset the draw before changing group size.');setGroup(p=>({...p,...input}));}}
     onRemove={async(userId:string)=>{setGroup(p=>({...p,members:p.members.filter(m=>m.user_id!==userId),joined_count:p.joined_count-1,sizes_ready:p.sizes_ready-1}));}}
+    onDelete={async()=>{ /* Demo-only preview: no database rows exist. */ }}
     onReveal={async()=>assignment}
   />;
 }

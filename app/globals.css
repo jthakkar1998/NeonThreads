@@ -50,3 +50,51 @@
   .app-content{padding-bottom:120px}
   .app-footer{padding-bottom:79px}
 }
+
+
+/* V2 | Rave Rules — desktop shows all six; mobile can expand/collapse */
+.rave-rules{position:relative;overflow:hidden;border:1px solid #59358b;border-radius:18px;background:radial-gradient(ellipse at 12% 0%,rgba(144,61,220,.16),transparent 50%),linear-gradient(125deg,#19122f,#0c1124 80%);padding:24px;box-shadow:0 12px 40px rgba(20,8,52,.2)}
+.rave-rules:before{content:"";position:absolute;top:0;left:30px;right:30px;height:1px;background:linear-gradient(90deg,transparent,#e38cfa,#4ac6f7,transparent);opacity:.8}
+.rave-rules-header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:19px}
+.rave-rules-eyebrow{display:flex;align-items:center;gap:7px;color:#7bdcf7;font-weight:850;font-size:10px;letter-spacing:.13em}
+.rave-rules-heading h2{font-weight:950;letter-spacing:-.035em;font-size:25px;margin:8px 0 5px;color:#f9f4ff}
+.rave-rules-heading h2 span{color:#de92fc;text-shadow:0 0 24px rgba(184,68,249,.2)}
+.rave-rules-heading p{color:#aaa0c5;font-size:12px;line-height:1.55;margin:0}
+.rave-rules-count{color:#ebb9fd;font-size:9px;font-weight:900;letter-spacing:.1em;border:1px solid #71458f;border-radius:50px;padding:9px 12px;white-space:nowrap;background:rgba(139,55,189,.11)}
+.rave-rules-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.rave-rule{min-width:0;min-height:184px;padding:17px 16px 16px;border:1px solid #3c315e;border-radius:12px;background:linear-gradient(155deg,rgba(34,24,64,.86),rgba(16,20,43,.90));transition:border-color .2s,transform .2s}
+.rave-rule:hover{transform:translateY(-2px);border-color:#7d51ad}
+.rave-rule-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.rave-rule-number{font-size:12px;font-weight:900;letter-spacing:.08em;color:#8e7caa}
+.rave-rule-icon{height:34px;width:34px;border-radius:10px;border:1px solid rgba(189,112,250,.3);display:grid;place-items:center;background:rgba(159,80,239,.12);color:#dba3fc}
+.rave-rule-cyan .rave-rule-icon{color:#76e6fb;border-color:rgba(67,205,243,.3);background:rgba(42,185,212,.1)}
+.rave-rule-pink .rave-rule-icon{color:#ffa4d5;border-color:rgba(234,104,178,.3);background:rgba(223,69,148,.1)}
+.rave-rule h3{font-size:14px;font-weight:850;line-height:1.35;letter-spacing:-.015em;color:#fff;margin:0 0 8px}
+.rave-rule p{font-size:11px;line-height:1.7;color:#b9adcf;margin:0}
+.rave-rules-toggle{display:none}
+@media(max-width:1050px){.rave-rules-list{grid-template-columns:repeat(2,minmax(0,1fr))}.rave-rule{min-height:170px}}
+@media(max-width:670px){
+  .rave-rules{padding:19px 17px;border-radius:15px}
+  .rave-rules-header{margin:0;align-items:flex-start;flex-wrap:wrap;gap:11px}
+  .rave-rules-heading h2{font-size:22px}
+  .rave-rules-heading p{font-size:11px}
+  .rave-rules-count{display:none}
+  .rave-rules-toggle{display:flex;align-items:center;justify-content:space-between;gap:9px;width:100%;font-size:11px;font-weight:850;color:#ebbbff;background:rgba(133,54,191,.12);border:1px solid #63368c;border-radius:9px;padding:11px 12px;margin-top:4px}
+  .rave-rules-toggle svg{transition:transform .2s}
+  .rave-rules-toggle svg.is-rotated{transform:rotate(180deg)}
+  .rave-rules-list{display:none;grid-template-columns:1fr;gap:10px;margin-top:14px}
+  .rave-rules-list.is-expanded{display:grid}
+  .rave-rule{min-height:0;padding:15px}
+  .rave-rule-top{margin-bottom:9px}
+  .rave-rule h3{font-size:13px}
+  .rave-rule p{font-size:11px}
+}
+/* V2 | Organizer-only permanent group deletion */
+.delete-group-panel{border-color:#663347;background:linear-gradient(135deg,rgba(75,22,51,.26),rgba(18,16,36,.9))}
+.delete-group-panel .panel-heading{margin-bottom:9px}
+.delete-group-panel .btn{margin-top:8px}
+.delete-group-panel strong{color:#ffe7ee}
+.delete-warning{display:flex;gap:8px;align-items:flex-start;color:#d4a0b4;font-size:11px;line-height:1.6;margin-top:12px}
+.delete-warning svg{flex-shrink:0;margin-top:1px}
+.confirm-modal .delete-instructions{margin-bottom:13px;color:#ffcad9}
+.confirm-modal .delete-confirm-name{font-weight:850;color:#ffe9f2;overflow-wrap:anywhere}
