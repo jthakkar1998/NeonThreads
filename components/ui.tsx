@@ -1,8 +1,9 @@
 'use client';
 
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, ChangeEventHandler, ReactNode } from 'react';
 import Link from 'next/link';
-import { Activity, ArrowUpRight, LoaderCircle, Sparkles, Shirt, Zap } from 'lucide-react';
+import { Activity, ArrowUpRight, CalendarDays, LoaderCircle, Sparkles, Shirt, Zap } from 'lucide-react';
+import { formatConcertDate } from '@/lib/date';
 
 export function Brand({ compact = false }: { compact?: boolean }) {
   return <Link href="/" className="brand-lockup" aria-label="Neon Threads home">
@@ -31,6 +32,26 @@ export function Alert({ message, tone = 'error', onClose }: { message: string; t
 
 export function EmptyConfiguration() {
   return <div className="empty-state config-state"><Zap size={44} className="neon-icon"/><h2>Connect Supabase to launch</h2><p>Add your Supabase URL and publishable key to your Vercel environment variables, and run the included SQL migration.</p><Link href="/demo" className="btn btn-primary">Preview the experience <ArrowUpRight size={16}/></Link></div>;
+}
+
+/**
+ * Keeps the native date picker for keyboard and touch accessibility, but shows
+ * a controlled, fixed-size date display on narrow screens. Mobile Safari can
+ * impose intrinsic sizing on its native date text even when width: 100% is set.
+ */
+export function ConcertDateInput({ value, onChange, required, disabled }: {
+  value: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  required?: boolean;
+  disabled?: boolean;
+}) {
+  return <div className="concert-date-control" data-empty={value ? 'false' : 'true'}>
+    <input className="concert-date-native" type="date" value={value} onChange={onChange} required={required} disabled={disabled} />
+    <div className="concert-date-display" aria-hidden="true">
+      <span className="concert-date-text">{value ? formatConcertDate(value) : 'Choose concert date'}</span>
+      <CalendarDays size={18} />
+    </div>
+  </div>;
 }
 
 export function InputField({ label, hint, children }: { label: string; hint?: string; children: ReactNode }) {
