@@ -26,6 +26,9 @@ function GroupsContent() {
     const q = new URLSearchParams(window.location.search);
     setCreating(q.has('create'));
     api.myGroups().then(setGroups).catch(err=>setError(friendlyError(err))).finally(()=>setLoading(false));
+    const openCreateFromNav = () => setCreating(true);
+    window.addEventListener('neonthreads:open-create-group', openCreateFromNav);
+    return () => window.removeEventListener('neonthreads:open-create-group', openCreateFromNav);
   }, []);
   function closeModal() {
     setCreating(false); setError('');

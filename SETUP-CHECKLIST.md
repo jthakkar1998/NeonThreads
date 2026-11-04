@@ -20,3 +20,15 @@
 - [ ] Confirm Delete Group appears only for the group organizer under Group Settings.
 - [ ] Delete an unwanted **test** group by typing its exact name; verify its card disappears from My Groups.
 - [ ] Verify your login and any other groups still work.
+
+
+## V3 UI update checklist (no SQL migration)
+
+- [ ] Copy the V3 changed files into the existing repository, preserving their paths, and commit to `main` (or your deployment branch).
+- [ ] Confirm Vercel production builds and deploys successfully; no new Supabase settings are needed.
+- [ ] Desktop: My groups expands/collapses; all joined groups are listed underneath; current group is highlighted.
+- [ ] Mobile: Groups button opens group switcher; close/backdrop works; each item navigates correctly.
+- [ ] Mobile: Create-group form shows concert date above expected group size (no overlap), including at ~320px screen width.
+- [ ] On the My groups overview, both Create links open the dialog without refreshing the page.
+- [ ] Recheck dashboard, rules accordion, assignment reveal, organizer settings, profile, and invite pages on a phone and a desktop.
+- [ ] Verify existing group membership, shirt sizes, saved assignments and delete-group function are unchanged.
