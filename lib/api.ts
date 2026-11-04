@@ -26,6 +26,7 @@ export const api = {
   generateDraw: (groupId: string) => call<void>('generate_draw', { p_group_id: groupId }),
   resetDraw: (groupId: string) => call<void>('reset_draw', { p_group_id: groupId }),
   removeMember: (groupId: string, userId: string) => call<void>('remove_member', { p_group_id: groupId, p_user_id: userId }),
+  deleteGroup: (groupId: string, confirmation: string) => call<void>('delete_group', { p_group_id: groupId, p_confirmation: confirmation }),
   assignment: (groupId: string) => call<Assignment | null>('get_my_assignment', { p_group_id: groupId }),
   myProfile: () => call<{ display_name: string; email: string }>('get_my_profile'),
   updateProfile: (name: string) => call<void>('update_my_profile', { p_display_name: name }),

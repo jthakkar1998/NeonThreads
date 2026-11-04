@@ -2,6 +2,21 @@
 
 A dark, neon rave-themed Secret-Santa-style web app, designed for small concert crews and reusable across future events.
 
+## Version 2 additions
+
+- **The Rave Rules:** Six approved exchange rules appear at the top of the group dashboard, with a collapsible section on narrow phone screens.
+- **Delete Group:** Organizer-only permanent deletion under **Group Settings → Danger Zone**; requires typing the exact group name. Removes the group, invitation, members-for-this-group and assignments, while leaving Supabase authentication accounts and other groups untouched.
+
+### How to upgrade an existing live Vercel / Supabase deployment from V1 to V2
+
+1. **Do not delete your Supabase project or rerun the original schema.** In your existing Supabase project, open SQL Editor and execute `supabase/migrations/202611030002_delete_group.sql`. This adds just one protected RPC; it does not delete any existing group.
+2. Commit and push the updated project files to the **same GitHub repository/branch** that is connected to your Neon Threads Vercel project (usually `main`). Alternatively use `neon-threads-v2-changed-files.zip` to replace only the changed files.
+3. Let Vercel rebuild the deployment. **No new Vercel environment variables are needed.**
+4. Log in as an organizer, open a group, check **Group dashboard → The Rave Rules**. On a phone, tap **View all 6 rules** to expand.
+5. Open **Group settings**, scroll to **Delete group**, click the delete button, then type the exact displayed group name. Confirm only for your test group. You will return to **My Groups** and the deleted group will disappear.
+
+**Safety:** The migration itself does not delete any data. Actual group deletion cannot be undone; only the organizer can call it. It removes the group for everyone but preserves each person's login and any other groups. If you deploy the UI before the SQL migration, the delete action will fail until you run the migration. Do not run any migration containing `DROP TABLE` to implement V2.
+
 ## Version 1 features
 
 - Email/password accounts (Supabase Auth) with email confirmation and password recovery.
@@ -26,7 +41,7 @@ A dark, neon rave-themed Secret-Santa-style web app, designed for small concert 
 
 The application **does not** require a `service_role` key, an API route for the draw, or a scheduled cron job. Every important write is performed by a validated Supabase `SECURITY DEFINER` PostgreSQL function and happens transactionally.
 
-## Deployment in 6 steps
+## First-time deployment in 6 steps
 
 ### 1. Create a dedicated Supabase project
 
@@ -37,6 +52,8 @@ Recommended: use a **new Supabase project** for Neon Threads to keep it isolated
 In **Supabase → SQL Editor**, open and run:
 
 `supabase/migrations/202611030001_init.sql`
+
+If setting up V2 for the first time, also run `supabase/migrations/202611030002_delete_group.sql` **after** the initial schema.
 
 This creates `profiles`, `groups`, `group_members`, `assignments` and their protected RPC functions. Run the file once on a clean Supabase project. It may be re-runnable for function edits, but don't use it as a substitute for versioned schema migrations once real data exists.
 
@@ -119,7 +136,7 @@ app/                   Next.js pages and styles
 components/            Shared interface, access guard and group workspace
 lib/                   Supabase client, RPC wrappers and types
 public/rave-stage.svg  Original festival-themed vector artwork
-supabase/migrations/   SQL schema, privileges and assignment generator
+supabase/migrations/   Initial SQL schema plus V2 group deletion migration
 scripts/verify-draw.mjs    Local randomized draw invariant checker
 ```
 

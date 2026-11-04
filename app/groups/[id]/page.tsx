@@ -32,6 +32,7 @@ function GroupContent() {
     onReset={async()=>{await api.resetDraw(id);await refresh();}}
     onUpdate={async(input)=>{await api.updateGroup(id,input);await refresh();}}
     onRemove={async(userId)=>{await api.removeMember(id,userId);await refresh();}}
+    onDelete={async(confirmation)=>{await api.deleteGroup(id,confirmation);}}
     onReveal={()=>api.assignment(id)}
   />;
 }
