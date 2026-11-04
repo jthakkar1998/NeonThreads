@@ -2,6 +2,26 @@
 
 A dark, neon rave-themed Secret-Santa-style web app, designed for small concert crews and reusable across future events.
 
+## Version 3 — group navigation and responsive UI polish
+
+**V3 is an app-code-only update for an existing V2 deployment. No Supabase migration, new credentials, or environment-variable changes are required.**
+
+- **Collapsible My Groups menu (desktop):** All groups the signed-in member belongs to appear nested beneath My groups. The selected group is highlighted, and the list expands automatically when viewing a group. My groups itself still opens the full overview; the chevron controls expand/collapse.
+- **Group switching on phones:** Tap **Groups** in the bottom navigation to open a compact list of all your exchanges. Tap **View all groups**, a specific group, or **Create new group**. Tap the backdrop/close button, or press Escape, to dismiss the menu.
+- **Mobile create-group form:** Date and expected-member inputs stack vertically on phones to prevent native browser controls from overlapping or escaping their cards. Inputs use 16px text on narrow screens to avoid automatic iPhone zoom.
+- **Responsive safeguards:** Improved wrapping and min-width constraints for event titles, member names, venue tags, group progress, organizer settings, dialogs, and the dashboard header at small phone sizes.
+- **Same-page Create link fix:** The Create shortcut works even when you are already on the My groups overview (without requiring a page refresh).
+
+### Deploy V3 over an already-live V2 website
+
+1. Download `neon-threads-v3-changed-files.zip` and extract it. **Copy the included files into the root of your existing Neon Threads GitHub repository, preserving the folder paths.** Replace the existing versions, then commit to the branch connected to Vercel (usually `main`). Alternatively use the full V3 project ZIP if you prefer to replace the whole codebase.
+2. Vercel should automatically build and deploy the new commit. **Do not rerun the Supabase initial-schema or deletion SQL migrations for this UI-only update.** Existing groups, members, sizes and assignments are untouched.
+3. On desktop, open a group and verify it appears **under My groups**, not next to Create group. Test collapsing and switching between groups.
+4. On a phone, tap **Groups** in the bottom navigation, choose a group, then go back and use **Create**. In the create-group dialog, check that the concert date and expected-member inputs are full width and separated vertically.
+5. Test group creation, group settings, secret assignment, profile, and the six Rave Rules at both phone and desktop widths.
+
+**UI audit scope:** Static HTML/CSS previews were checked in headless Chromium at viewport widths from **320px to 1440px**. The dashboard, landing, and create-group previews were checked across 14 widths (42 cases); representative layouts of the group overview, profile, settings, assignment, signup, invitation, and delete-confirmation were checked across 13 widths (91 cases). These checks found no document-level horizontal overflow. The navigation toggle and mobile group menu were also exercised in the static preview. A full Next.js build and real-account Supabase testing were not possible in the offline authoring environment; confirm the Vercel build and smoke-test authenticated workflows on the live site before inviting your crew.
+
 ## Version 2 additions
 
 - **The Rave Rules:** Six approved exchange rules appear at the top of the group dashboard, with a collapsible section on narrow phone screens.
